@@ -70,7 +70,27 @@ extension Float {
 // http://forums.codemasters.com/discussion/53139/f1-2017-d-box-and-udp-output-specification/p1
 */
 
-struct CarUDPData {
+class CarUDPData {
+    
+    
+    static var modernNames: [UInt8:String] = [0:"Sebastian Vettel", 1:"Daniil Kvyat", 2:"Fernando Alonso",
+                                              3:"Felipe Massa", 5:"Sergio Perez", 6:"Kimi Räikkönen",
+                                              7:"Romain Grosjean", 9:"Lewis Hamilton", 10:"Nico Hulkenberg",
+                                              14:"Kevin Magnussen", 15:"Valtteri Bottas", 16:"Daniel Ricciardo",
+                                              18:"Marcus Ericsson", 20:"Jolyon Palmer", 22:"Max Verstappen",
+                                              23:"Carlos Sainz Jr.", 31:"Pascal Wehrlein",33:"Esteban Ocon",
+                                              34:"Stoffel Vandoorne", 35:"Lance Stroll"]
+    
+    //static var classicNames:[UInt8:String] //
+    
+    //static var modernTeams:[UInt8:String] //
+    
+    //static var classicTeams:[UInt8:String]//
+    
+    static var tyreCompounds: [UInt8:String] = [0: "US", 1:"SS", 2:"S", 3:"M", 4:"H", 5:"I", 6:"W"]
+    
+    var isClassic:Bool?
+    
     var m_worldPosition:[Float]? = nil; // world co-ordinates of vehicle
     var m_lastLapTime:Float? = nil;
     var m_currentLapTime:Float? = nil;
@@ -80,6 +100,8 @@ struct CarUDPData {
     var m_lapDistance:Float? = nil;
     var m_driverId:UInt8? = nil;
         /*
+     
+            // Create a dictionary out of these driver IDs and return the string of the driver's name.
          2017 Drivers
          ID
      
@@ -115,7 +137,7 @@ struct CarUDPData {
     var m_penalties:UInt8? = nil;  // NEW: accumulated time penalties in seconds to be added
 };
 
-struct UDPPacket {
+class UDPPacket {
     var m_time:Float? = nil;
     var  m_lapTime:Float? = nil;
     var  m_lapDistance:Float? = nil;
@@ -220,7 +242,7 @@ struct UDPPacket {
     // Car data
     var m_num_cars:UInt8? = nil               //   number of cars in data
     var m_player_car_index:UInt8? = nil         //    index of player's car in the array
-    var m_car_data:[CarUDPData]? = nil; // Array length 20, CarUDPData for all cars on track
+    var m_car_data:[CarUDPData] = []; // Array length 20, CarUDPData for all cars on track
     var m_yaw:Float? = nil;  // NEW (v1.8)
     var m_pitch:Float? = nil;  // NEW (v1.8)
     var m_roll:Float? = nil;  // NEW (v1.8)
@@ -376,33 +398,37 @@ struct UDPPacket {
             self.m_num_cars         = allBytes[index];index+=1              //   number of cars in data
             self.m_player_car_index = allBytes[index];index+=1        //    index of player's car in the array
             
-            //TODO Resolve this array.
-            if var car = self.m_car_data {
-            for i in 0..<lengthCarDataArray {
-                car[i].m_worldPosition = [floatFromBytes(allBytes, startIndex: index, size: 4),
-                                                         floatFromBytes(allBytes, startIndex: index+4, size: 4),
-                                                         floatFromBytes(allBytes, startIndex: index+8, size: 4)];index+=12; // world co-ordinates of vehicle
-                car[i].m_lastLapTime = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
-                car[i].m_currentLapTime = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
-                car[i].m_bestLapTime = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
-                car[i].m_sector1Time = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
-                car[i].m_sector2Time = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
-                car[i].m_lapDistance = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
-                car[i].m_driverId = allBytes[index];index+=1; // Array length 20, CarUDPData for all cars on track
-                car[i].m_teamId = allBytes[index];index+=1;
-                car[i].m_carPosition = allBytes[index];index+=1;     // UPDATED: track positions of vehicle
-                car[i].m_currentLapNum = allBytes[index];index+=1;
-                car[i].m_tyreCompound = allBytes[index];index+=1;    // compound of tyre – 0 = ultra soft, 1 = super soft, 2 = soft, 3 = medium, 4 = hard, 5 = inter, 6 = wet
-                car[i].m_inPits = allBytes[index];index+=1;         // 0 = none, 1 = pitting, 2 = in pit area
-                car[i].m_sector = allBytes[index];index+=1;           // 0 = sector1, 1 = sector2, 2 = sector3
-                car[i].m_currentLapInvalid = allBytes[index];index+=1; // current lap invalid - 0 = valid, 1 = invalid
-                car[i].m_penalties = allBytes[index];index+=1;
+            for _ in 0..<lengthCarDataArray {
+                
+                let car = CarUDPData()
+
+                    car.isClassic = self.m_era != 2017
+                    car.m_worldPosition = [floatFromBytes(allBytes, startIndex: index, size: 4),
+                                                             floatFromBytes(allBytes, startIndex: index+4, size: 4),
+                                                             floatFromBytes(allBytes, startIndex: index+8, size: 4)];index+=12; // world co-ordinates of vehicle
+                    car.m_lastLapTime = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
+                    car.m_currentLapTime = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
+                    car.m_bestLapTime = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
+                    car.m_sector1Time = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
+                    car.m_sector2Time = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
+                    car.m_lapDistance = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
+                    car.m_driverId = allBytes[index];index+=1; // Array length 20, CarUDPData for all cars on track
+                    car.m_teamId = allBytes[index];index+=1;
+                    car.m_carPosition = allBytes[index];index+=1;     // UPDATED: track positions of vehicle
+                    car.m_currentLapNum = allBytes[index];index+=1;
+                    car.m_tyreCompound = allBytes[index];index+=1;    // compound of tyre – 0 = ultra soft, 1 = super soft, 2 = soft, 3 = medium, 4 = hard, 5 = inter, 6 = wet
+                    car.m_inPits = allBytes[index];index+=1;         // 0 = none, 1 = pitting, 2 = in pit area
+                    car.m_sector = allBytes[index];index+=1;           // 0 = sector1, 1 = sector2, 2 = sector3
+                    car.m_currentLapInvalid = allBytes[index];index+=1; // current lap invalid - 0 = valid, 1 = invalid
+                    car.m_penalties = allBytes[index];index+=1;
+                
+                self.m_car_data.append(car)
+                
                 };
-            } else {index += 900}
             
             self.m_yaw              = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;  // NEW (v1.8)
-            self.m_pitch = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;  // NEW (v1.8)
-            self.m_roll = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;  // NEW (v1.8)
+            self.m_pitch            = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;  // NEW (v1.8)
+            self.m_roll             = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;  // NEW (v1.8)
             self.m_x_local_velocity = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4 ;          // NEW (v1.8) Velocity in local space
             self.m_y_local_velocity = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;          // NEW (v1.8) Velocity in local space
             self.m_z_local_velocity = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;          // NEW (v1.8) Velocity in local space
@@ -413,11 +439,6 @@ struct UDPPacket {
             self.m_ang_acc_x        = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;                 // NEW (v1.8) angular acceleration x-component
             self.m_ang_acc_y        = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;                 // NEW (v1.8) angular acceleration y-component
             self.m_ang_acc_z        = floatFromBytes(allBytes, startIndex: index, size: 4);index+=4;
-            
-            
-            
-            
-            
             
         } else {
             self.m_time = 0

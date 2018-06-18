@@ -12,7 +12,6 @@ import UIKit
 class TimingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var positionLabel: UILabel!
-    @IBOutlet weak var carNumberLabel: UILabel!
     @IBOutlet weak var driverNameLabel: UILabel!
     
     @IBOutlet weak var tyreCompoundLabel: UILabel!

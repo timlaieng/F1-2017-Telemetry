@@ -7,18 +7,46 @@
 //
 
 import Foundation
+import SwiftSocket
 import CocoaAsyncSocket
+
+protocol UDPManagerDelegate: class {
+    
+    func didReceivePacket(packet:UDPPacket)
+}
+
 
 class UDPManager: NSObject, GCDAsyncUdpSocketDelegate {
     
-    /*
-    if let ipAddress = self.getWiFiAddress() {
-        print("IP address:\(ipAddress)")
+    static var shared = UDPManager()
+    public weak var delegate: UDPManagerDelegate? //put weak here to ensure no memory leaks.
+    
+    
+    override init() {
+        super.init()
+        if let wifi = self.getWiFiAddress() {
+            print("IP address: \(wifi)")
+        }
+        
+        let socket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
+        
+        do {
+            try socket.bind(toPort: 20777)
+            try socket.enableBroadcast(true)
+            try socket.beginReceiving()
+            
+        } catch _ as NSError { print("Issue with setting up listener") }
     }
-    */
     
     
     
+    func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
+        
+        //        // …or old style through pointers:
+        let packet = UDPPacket.init(data: data)
+        
+        delegate?.didReceivePacket(packet: packet)
+    }
     
     func getWiFiAddress() -> String? {
         var address : String?
@@ -52,5 +80,6 @@ class UDPManager: NSObject, GCDAsyncUdpSocketDelegate {
         freeifaddrs(ifaddr)
         
         return address
+        
     }
 }
