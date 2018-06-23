@@ -45,7 +45,6 @@ extension UInt8 {
             return nil
         }
         
-        //TODO: need to change bit parsing.
         var value: UInt8 = 0
         for byte in bytes.reversed() {
             value = value << 8 //what bitshift would be required here?
@@ -73,13 +72,15 @@ extension Float {
 class CarUDPData {
     
     
-    static var modernNames: [UInt8:String] = [0:"Sebastian Vettel", 1:"Daniil Kvyat", 2:"Fernando Alonso",
-                                              3:"Felipe Massa", 5:"Sergio Perez", 6:"Kimi Räikkönen",
-                                              7:"Romain Grosjean", 9:"Lewis Hamilton", 10:"Nico Hulkenberg",
-                                              14:"Kevin Magnussen", 15:"Valtteri Bottas", 16:"Daniel Ricciardo",
-                                              18:"Marcus Ericsson", 20:"Jolyon Palmer", 22:"Max Verstappen",
-                                              23:"Carlos Sainz Jr.", 31:"Pascal Wehrlein",33:"Esteban Ocon",
-                                              34:"Stoffel Vandoorne", 35:"Lance Stroll"]
+    static var modernLastNames: [UInt8:String] = [0:"Vettel", 1:"Kvyat", 2:"Alonso", 3:"Massa", 5:"Perez", 6:"Räikkönen",
+                                              7:"Grosjean", 9:"Hamilton", 10:"Hulkenberg", 14:"Magnussen", 15:"Bottas",
+                                              16:"Ricciardo", 18:"Ericsson", 20:"Palmer", 22:"Verstappen", 23:"Sainz",
+                                              31:"Wehrlein",33:"Ocon", 34:"Vandoorne", 35:"Stroll"]
+    
+    static var modernFirstNames: [UInt8:String] = [0:"Sebastian", 1:"Daniil", 2:"Fernando", 3:"Felipe", 5:"Sergio", 6:"Kimi",
+                                                  7:"Romain", 9:"Lewis", 10:"Nico", 14:"Kevin", 15:"Valtteri", 16:"Daniel",
+                                                  18:"Marcus", 20:"Jolyon", 22:"Max", 23:"Carlos", 31:"Pascal",33:"Esteban",
+                                                  34:"Stoffel", 35:"Lance"]
     
     //static var classicNames:[UInt8:String] //
     

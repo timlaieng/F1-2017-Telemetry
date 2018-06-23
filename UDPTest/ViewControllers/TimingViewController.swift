@@ -13,7 +13,7 @@ class TimingViewController: UIViewController, UITableViewDataSource, UITableView
 
     var cars: [CarUDPData]?
     var timer = Timer()
-    let refreshRate:Double = 1.000 // time in seconds. Must be of Double type.
+    let refreshRate:Double = 0.250 // time in seconds. Must be of Double type.
     
     @IBOutlet weak var timingTableView: UITableView!
 
@@ -27,8 +27,10 @@ class TimingViewController: UIViewController, UITableViewDataSource, UITableView
     //Practice, Qualifying(Q1, Q2, Q3), Race
     
     func didReceivePacket(packet: UDPPacket) {
-        cars = packet.m_car_data;
-       // self.timingTableView.reloadData()
+        cars = packet.m_car_data.sorted{$0.m_carPosition! < $1.m_carPosition!}
+        //print("0: P\(cars![0].m_carPosition!.description), 1: P\(cars![1].m_carPosition!.description), 2: P\(cars![2].m_carPosition!.description)")
+        
+        //self.timingTableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -46,15 +48,26 @@ class TimingViewController: UIViewController, UITableViewDataSource, UITableView
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "driverTimingCell") as! TimingTableViewCell
         
-        guard let selectedCar = cars?[indexPath.row] else {return UITableViewCell()}
+        guard let carsInSession = cars else {return UITableViewCell()}
+        
+            let selectedCar = carsInSession[indexPath.row]
+        
+            if indexPath.row != 0 {
+                let previousCar = carsInSession[indexPath.row - 1]
+                    if selectedCar.m_carPosition == 0 {
+                        cell.gapTimeLabel.text = "---"
+                    } else {
+                        //print("P:\(previousCar.m_carPosition!.description), P:\(selectedCar.m_carPosition!.description)")
+                        let gap = previousCar.m_currentLapTime! - selectedCar.m_currentLapTime!
+                        //print(previousCar.m_currentLapTime!)
+                        cell.gapTimeLabel.text = "\(String(format:"%.3f", gap))"}
+                }
         
             if let sector1Time = selectedCar.m_sector1Time, let sector2Time = selectedCar.m_sector2Time, let lastLap = selectedCar.m_lastLapTime {
                 
                 //TODO: NEED TO STORE S1 AND S2 TIMES SOMEWHERE
                 let sector3Time = lastLap - sector1Time - sector2Time // when lap time is set, sector 1 and 2 times are erased.
-            
-                
-                
+
                 if sector1Time <= 0 {
                     cell.sectorOneTimeLabel.text = " "
                 } else {
@@ -75,10 +88,10 @@ class TimingViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 cell.positionLabel.text = "P" + "\(selectedCar.m_carPosition!)"
                 
-                cell.driverNameLabel.text = "\(CarUDPData.modernNames[selectedCar.m_driverId!]!)"
+                cell.driverNameLabel.text = "\(CarUDPData.modernLastNames[selectedCar.m_driverId!]!)"
                 cell.tyreCompoundLabel.text = "\(CarUDPData.tyreCompounds[selectedCar.m_tyreCompound!]!)"
                 cell.lapTimeLabel.text = "\(selectedCar.m_bestLapTime!.description)"
-                cell.gapTimeLabel.text = "gap"
+                
             
             } else {
                 cell.sectorOneTimeLabel.text = "-:--.---"
@@ -109,17 +122,7 @@ class TimingViewController: UIViewController, UITableViewDataSource, UITableView
         timer = Timer.scheduledTimer(timeInterval: refreshRate, target: self, selector: #selector(updateTable), userInfo: nil, repeats: true)
     }
     
-    @IBAction func TimingSwipeGestureRecognizer(_ sender: UISwipeGestureRecognizer) {
-        
-        let swipeGesture = sender
-        
-        switch swipeGesture.direction {
-        case .left:
-            self.performSegue(withIdentifier: "timingsToCockpitViewSegue", sender: self)
-        default:
-            break
-        }
-    }
+    
     
     
 }

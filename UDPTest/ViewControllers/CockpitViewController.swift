@@ -79,7 +79,7 @@ class CockpitViewController: UIViewController, GCDAsyncUdpSocketDelegate, UDPMan
         }
         
         self.rpmLabel.text = String(format: "%.f", packet.m_engineRate!)
-        self.speedLabel.text = "\(floorf(packet.m_speed! * 3.6))"
+        self.speedLabel.text = "\(String(format: "%.f", floorf(packet.m_speed! * 3.6)))"
         
         
         let revs = packet.m_engineRate! / packet.m_max_rpm!
@@ -93,9 +93,9 @@ class CockpitViewController: UIViewController, GCDAsyncUdpSocketDelegate, UDPMan
         
         
         self.testLabel.text = """
-        No. Cars on track: \(packet.m_num_cars!)
-        Car[0]: \(packet.m_car_data[0].m_carPosition!.description)
-        Car[1]: \(packet.m_car_data[1].m_carPosition!.description)
+        Index: \(packet.m_player_car_index!)
+        Car[0]: \(packet.m_car_data[0].m_currentLapTime!.description)
+        Car[1]: \(packet.m_car_data[1].m_currentLapTime!.description)
         """
         
         if var time = packet.m_last_lap_time, let position = packet.m_car_position {
