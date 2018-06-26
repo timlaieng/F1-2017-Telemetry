@@ -118,8 +118,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lcg-Ma-MRD" customClass="TimingTableView" customModule="UDPTest" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="70" width="667" height="240"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lcg-Ma-MRD" customClass="TimingTableView" customModule="UDPTest" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="70" width="667" height="273"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="driverTimingCell" rowHeight="38" id="IF5-bd-x3a" customClass="TimingTableViewCell" customModule="UDPTest" customModuleProvider="target">
@@ -262,7 +262,8 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="lcg-Ma-MRD" firstAttribute="leading" secondItem="6f6-2y-IBE" secondAttribute="leading" id="AF1-gI-I4J"/>
-                            <constraint firstItem="fw3-Og-Ehw" firstAttribute="top" secondItem="lcg-Ma-MRD" secondAttribute="bottom" constant="80" id="VKL-Z9-shW"/>
+                            <constraint firstItem="lcg-Ma-MRD" firstAttribute="top" secondItem="xF8-XQ-2xm" secondAttribute="bottom" constant="70" id="hEW-D3-a8c"/>
+                            <constraint firstItem="fw3-Og-Ehw" firstAttribute="top" secondItem="lcg-Ma-MRD" secondAttribute="bottom" id="p7C-YN-t4u"/>
                             <constraint firstAttribute="trailing" secondItem="lcg-Ma-MRD" secondAttribute="trailing" id="wqw-26-x0V"/>
                         </constraints>
                     </view>
@@ -275,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uAp-qJ-ZZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="390"/>
+            <point key="canvasLocation" x="876.61169415292363" y="389.60000000000002"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="RJf-3Y-Xng">
@@ -283,6 +284,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="kql-TS-gST" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" itemPositioning="centered" id="hQ0-Kv-vPg">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

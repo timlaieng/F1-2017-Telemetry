@@ -73,24 +73,35 @@ class CarUDPData {
     
     
     static var modernLastNames: [UInt8:String] = [0:"Vettel", 1:"Kvyat", 2:"Alonso", 3:"Massa", 5:"Perez", 6:"Räikkönen",
-                                              7:"Grosjean", 9:"Hamilton", 10:"Hulkenberg", 14:"Magnussen", 15:"Bottas",
-                                              16:"Ricciardo", 18:"Ericsson", 20:"Palmer", 22:"Verstappen", 23:"Sainz",
-                                              31:"Wehrlein",33:"Ocon", 34:"Vandoorne", 35:"Stroll"]
+                                                  7:"Grosjean", 9:"Hamilton", 10:"Hulkenberg", 14:"Magnussen", 15:"Bottas",
+                                                  16:"Ricciardo", 18:"Ericsson", 20:"Palmer", 22:"Verstappen", 23:"Sainz",
+                                                  31:"Wehrlein",33:"Ocon", 34:"Vandoorne", 35:"Stroll"]
     
     static var modernFirstNames: [UInt8:String] = [0:"Sebastian", 1:"Daniil", 2:"Fernando", 3:"Felipe", 5:"Sergio", 6:"Kimi",
-                                                  7:"Romain", 9:"Lewis", 10:"Nico", 14:"Kevin", 15:"Valtteri", 16:"Daniel",
-                                                  18:"Marcus", 20:"Jolyon", 22:"Max", 23:"Carlos", 31:"Pascal",33:"Esteban",
-                                                  34:"Stoffel", 35:"Lance"]
+                                                   7:"Romain", 9:"Lewis", 10:"Nico", 14:"Kevin", 15:"Valtteri", 16:"Daniel",
+                                                   18:"Marcus", 20:"Jolyon", 22:"Max", 23:"Carlos", 31:"Pascal",33:"Esteban",
+                                                   34:"Stoffel", 35:"Lance"]
     
-    //static var classicNames:[UInt8:String] //
+    static var classicLastNames:[UInt8:String] = [0:"Michalski", 1: "Giles", 2:"Correia", 3:"Levasseur", 4: "Forest", 5: "Moreno",
+                                                  6: "Saari", 7: "Belousov", 8: "Kaufmann", 9: "Atiyeh", 10: "Clarke", 14:"Laursen",
+                                                  15: "Coppens", 16: "Murray", 18: "Calabresi", 20: "Letourneau", 22: "Izum", 23:"Barnes",
+                                                  24: "Schiffer", 31: "Nieves", 32: "Visser", 33: "Waldmuller", 34:"Quesada", 68:"Roth"]
+    static var classicFirstNames:[UInt8:String] = [0: "Klimek", 1: "Martin", 2:"Igor", 3:"Sophie", 4: "Alain", 5: "Santiago",
+                                                   6: "Esto", 7: "Peter", 8: "Lars", 9: "Yasar", 10: "Howard", 14: "Marie",
+                                                   15: "Benjamin", 16: "Alex", 18: "Callisto", 20: "Jay", 22: "Naota", 23: "Arron",
+                                                   24: "Jonas", 31: "Flavio", 32: "Noah", 33: "Gert", 34: "Julian", 68: "Lucas"]
     
-    //static var modernTeams:[UInt8:String] //
+    var m_teamId:UInt8? = nil;
+    var isClassic:Bool?
+    static var modernTeams:[UInt8:String] = [0: "Red Bull", 1: "Ferrari", 2: "McLaren", 3: "Renault", 4: "Mercedes", 5: "Sauber", 6: "Force India", 7: "Williams", 8: "Toro Rosso", 11: "Haas"]
     
-    //static var classicTeams:[UInt8:String]//
+    static var classicTeams:[UInt8:String] = [0: "Williams 1992", 1: "McLaren 1988", 2: "McLaren 2008", 3: "Ferrari 2004", 4: "Ferrari 1995", 5: "Ferrari 2007", 6: "McLaren 1998",
+                                              7: "Williams 1996", 8: "Renault 2006", 10: "Ferrari 2002", 11: "Redbull 2010", 12: "McLaren 1991"]
     
+    
+    var m_tyreCompound:UInt8? = nil;
     static var tyreCompounds: [UInt8:String] = [0: "US", 1:"SS", 2:"S", 3:"M", 4:"H", 5:"I", 6:"W"]
     
-    var isClassic:Bool?
     
     var m_worldPosition:[Float]? = nil; // world co-ordinates of vehicle
     var m_lastLapTime:Float? = nil;
@@ -100,38 +111,8 @@ class CarUDPData {
     var m_sector2Time:Float? = nil;
     var m_lapDistance:Float? = nil;
     var m_driverId:UInt8? = nil;
-        /*
-     
-            // Create a dictionary out of these driver IDs and return the string of the driver's name.
-         2017 Drivers
-         ID
-     
-         0 Sebastian Vettel, 1 Daniil Kvyat, 2 Fernando Alonso, 3 Felipe Massa, 5 Sergio Perez, 6 Kimi Räikkönen,
-         7 Romain Grosjean, 9 Lewis Hamilton, 10 Nico Hulkenberg, 14 Kevin Magnussen, 15 Valtteri Bottas, 16 Daniel Ricciardo,
-         18 Marcus Ericsson, 20 Jolyon Palmer, 22 Max Verstappen, 23 Carlos Sainz Jr., 31 Pascal Wehrlein,
-         33 Esteban Ocon, 34 Stoffel Vandoorne, 35 Lance Stroll
-     
-         Classic Drivers
-         ID
-         0 Klimek Michalski, 1 Martin Giles, 2 Igor Correia, 3 Sophie Levasseur, 4 Alain Forest, 5 Santiago Moreno
-         6 Esto Saari, 7 Peter Belousov, 8 Lars Kaufmann, 9 Yasar Atiyeh, 10 Howard Clarke, 14 Marie Laursen,
-         15 Benjamin Coppens, 16 Alex Murray, 18 Callisto Calabresi, 20 Jay Letourneau, 22 Naota Izum, 23 Arron Barnes,
-         24 Jonas Schiffer, 31 Flavio Nieves, 32 Noah Visser, 33 Gert Waldmuller, 34 Julian Quesada, 68 Lucas Roth
-         */
-    var m_teamId:UInt8? = nil;
-        /*
-         2017 Team
-         Team ID
-         0 Redbull, 1 Ferrari, 2 McLaren, 3 Renault, 4 Mercedes, 5 Sauber, 6 Force India, 7 Williams, 8 Toro Rosso, 11 Haas
-     
-         Classic Team
-         Team ID
-         0 Williams 1992, 1 McLaren 1988, 2 McLaren 2008, 3 Ferrari 2004, 4 Ferrari 1995, 5 Ferrari 2007, 6 McLaren 1998
-         7 Williams 1996, 8 Renault 2006, 10 Ferrari 2002, 11 Redbull 2010, 12 McLaren 1991
-         */
     var m_carPosition:UInt8? = nil;     // UPDATED: track positions of vehicle
     var m_currentLapNum:UInt8? = nil;
-    var m_tyreCompound:UInt8? = nil;    // compound of tyre – 0 = ultra soft, 1 = super soft, 2 = soft, 3 = medium, 4 = hard, 5 = inter, 6 = wet
     var m_inPits:UInt8? = nil;           // 0 = none, 1 = pitting, 2 = in pit area
     var m_sector:UInt8? = nil;           // 0 = sector1, 1 = sector2, 2 = sector3
     var m_currentLapInvalid:UInt8? = nil; // current lap invalid - 0 = valid, 1 = invalid

@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UDPTest/Classes/DataPacket.swift"
-            timestampString = "551016876.109622"
+            timestampString = "551747497.983912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "365"
+            endingLineNumber = "365"
+            landmarkName = "init(data:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UDPTest/Classes/DataPacket.swift"
-            timestampString = "551016876.1097029"
+            timestampString = "551747497.983984"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "431"
-            endingLineNumber = "431"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "393"
+            endingLineNumber = "393"
+            landmarkName = "init(data:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
