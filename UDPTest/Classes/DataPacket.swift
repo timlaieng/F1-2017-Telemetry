@@ -71,7 +71,7 @@ extension Float {
 
 class CarUDPData {
     
-    
+// using a static var when this becomes an array seems quite inefficient.
     static var modernLastNames: [UInt8:String] = [0:"Vettel", 1:"Kvyat", 2:"Alonso", 3:"Massa", 5:"Perez", 6:"Räikkönen",
                                                   7:"Grosjean", 9:"Hamilton", 10:"Hulkenberg", 14:"Magnussen", 15:"Bottas",
                                                   16:"Ricciardo", 18:"Ericsson", 20:"Palmer", 22:"Verstappen", 23:"Sainz",
