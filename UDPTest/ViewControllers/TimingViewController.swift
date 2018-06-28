@@ -10,12 +10,16 @@ import Foundation
 import UIKit
 
 class TimingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UDPManagerDelegate {
-
+ 
+    
     var cars: [CarUDPData]?
     var carsLogger: [[CarUDPData]?]?
     var indexOfPacket: Int = 0
     var timer = Timer()
     let refreshRate:Double = 0.250 // time in seconds. Must be of Double type.
+    var session: Float?
+  
+    
     
     @IBOutlet weak var timingTableView: UITableView!
 
@@ -29,9 +33,21 @@ class TimingViewController: UIViewController, UITableViewDataSource, UITableView
     //Practice, Qualifying(Q1, Q2, Q3), Race
     
     func didReceivePacket(packet: UDPPacket) {
+        session = packet.m_sessionType
         cars = packet.m_car_data
+        
+        
+        
+        
         carsLogger?.append(cars); indexOfPacket += 1
+        
     }
+    
+    
+    
+    
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -48,7 +64,7 @@ class TimingViewController: UIViewController, UITableViewDataSource, UITableView
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "driverTimingCell") as! TimingTableViewCell
         
-        guard let carsInSession = cars else {return UITableViewCell()}
+        guard let carsInSession = cars, session != 0 else {return UITableViewCell()}
  
             let sortedCars = carsInSession.sorted{$0.m_carPosition! < $1.m_carPosition!}
             let selectedCar = sortedCars[indexPath.row]

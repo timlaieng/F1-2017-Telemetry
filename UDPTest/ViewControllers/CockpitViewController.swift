@@ -64,7 +64,6 @@ class CockpitViewController: UIViewController, GCDAsyncUdpSocketDelegate, UDPMan
         //self.hmsFrom(seconds: Int(packet.m_time!)) { (h, m, s) in
         //}
         
-        
         let gear = Int(packet.m_gear!)
         switch gear {
         case 0:
@@ -92,11 +91,17 @@ class CockpitViewController: UIViewController, GCDAsyncUdpSocketDelegate, UDPMan
 //                self.carWorldPosition?.worldZ = packet.m_z
         
         
-        self.testLabel.text = """
-        Index: \(packet.m_player_car_index!)
-        Car[0]: \(packet.m_car_data[0].m_currentLapTime!.description)
-        Car[1]: \(packet.m_car_data[1].m_currentLapTime!.description)
+        
+        print(packet.m_car_data[0].driverFastestSectorOne?.description)
+        print(packet.m_car_data[0].driverFastestSectorTwo?.description)
+        if let fs1 = packet.m_car_data[0].driverFastestSectorOne {
+        
+            
+            self.testLabel.text = """
+        Car[0] Fastest S1: \(fs1.description)
         """
+        }
+        
         
         if var time = packet.m_last_lap_time, let position = packet.m_car_position {
             time -= 60

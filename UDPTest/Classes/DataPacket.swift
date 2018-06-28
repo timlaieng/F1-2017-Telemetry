@@ -23,7 +23,6 @@ extension UInt16 {
     }
 }
 
-//TODO: Ask Danny about this UInt32 extension.
 extension UInt32 {
     init?(bytes: [UInt8]) {
         if bytes.count != 4 || bytes.count != 1 {
@@ -117,6 +116,90 @@ class CarUDPData {
     var m_sector:UInt8? = nil;           // 0 = sector1, 1 = sector2, 2 = sector3
     var m_currentLapInvalid:UInt8? = nil; // current lap invalid - 0 = valid, 1 = invalid
     var m_penalties:UInt8? = nil;  // NEW: accumulated time penalties in seconds to be added
+    
+    //last and session sectors
+    
+    var driverLastSectorOne: Float? = nil
+    var driverLastSectorTwo: Float? = nil
+    var driverLastSectorThree: Float? = nil
+    var driverFastestSectorOne: Float? = nil
+    var driverFastestSectorTwo: Float? = nil
+    var driverFastestSectorThree: Float? = nil
+    
+    func getFastestSectorTimes(){
+        
+        if let s1Time = m_sector1Time, let s2Time = m_sector2Time {
+            
+            //Driver on first lap
+            //Driver in S1, no times set
+            
+            // no need to calculate anything.
+            
+            //Driver in S2, only S1 time set. No best or last lap times.
+            if s1Time > Float(0.0) && s2Time == Float(0.0) {
+                
+                driverLastSectorOne = s1Time
+                
+                if driverFastestSectorOne == nil || s1Time < driverFastestSectorOne! {
+                    driverFastestSectorOne = s1Time
+                }
+            } //End check for last and fastest Sector 1, Lap 1
+            
+            
+            //Driver in S3, only S1 and S2 time set. No best or last lap times.
+            if s1Time > Float(0.0) && s2Time > Float(0.0) {
+                
+                driverLastSectorTwo = s2Time
+                
+                if driverFastestSectorTwo == nil || s2Time < driverFastestSectorTwo! {
+                    driverFastestSectorTwo = s2Time
+                }
+            } //End check for last and fastest Sector 2, Lap 1
+            
+            
+            
+            //Driver not on first lap,
+            if let lastLap = m_lastLapTime, lastLap > Float(0.0) {
+                //Driver in S1. Last lap time set, S1 & S2 times == 0
+                
+                if s1Time == Float(0.0) && s2Time == Float(0.0) {
+                    
+                    //TODO:- resolve force unwrapping nil.
+                    driverLastSectorThree = lastLap - driverLastSectorTwo! - driverLastSectorOne!
+                    
+                    if driverFastestSectorThree == nil || driverFastestSectorThree! < driverFastestSectorThree! {
+                        driverFastestSectorThree = driverLastSectorThree
+                    }
+                } //End check for last Sector 3, lap 2+
+                
+                //Driver not on first lap, in S2, last lap time set, S1 time is set, S2 == 0
+                
+                if s1Time > Float(0.0) && s2Time == Float(0.0) {
+                    driverLastSectorOne = s1Time
+                    
+                    if s1Time < driverFastestSectorOne! {
+                        driverFastestSectorOne = s1Time
+                    }
+                } //End check for last Sector 1, lap 2+
+                
+                
+                //Driver not on first lap, in S3, last lap time set, S1 and S2 times are set.
+                
+                if s1Time > Float(0.0) && s2Time > Float(0.0) {
+                    
+                    driverLastSectorTwo = s2Time
+                    
+                    if s2Time < driverFastestSectorTwo! {
+                        driverFastestSectorTwo = s2Time
+                    }
+                } //End check for last Sector 2, lap 2+
+                
+                
+                
+            }
+        }
+    }
+    
 };
 
 class UDPPacket {
@@ -235,6 +318,8 @@ class UDPPacket {
     var m_ang_acc_x:Float? = nil;                 // NEW (v1.8) angular acceleration x-component
     var m_ang_acc_y:Float? = nil;                 // NEW (v1.8) angular acceleration y-component
     var m_ang_acc_z:Float? = nil;
+    
+    
     
     
     func floatFromBytes(_ bytes:[UInt8], startIndex: Int, size: Int) -> Float {
@@ -403,6 +488,8 @@ class UDPPacket {
                     car.m_sector = allBytes[index];index+=1;           // 0 = sector1, 1 = sector2, 2 = sector3
                     car.m_currentLapInvalid = allBytes[index];index+=1; // current lap invalid - 0 = valid, 1 = invalid
                     car.m_penalties = allBytes[index];index+=1;
+                
+                car.getFastestSectorTimes()
                 
                 self.m_car_data.append(car)
                 

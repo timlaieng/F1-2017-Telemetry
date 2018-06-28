@@ -11,10 +11,8 @@ import SwiftSocket
 import CocoaAsyncSocket
 
 protocol UDPManagerDelegate: class {
-    
     func didReceivePacket(packet:UDPPacket)
 }
-
 
 class UDPManager: NSObject, GCDAsyncUdpSocketDelegate {
     
@@ -36,9 +34,9 @@ class UDPManager: NSObject, GCDAsyncUdpSocketDelegate {
             try socket.beginReceiving()
             
         } catch _ as NSError { print("Issue with setting up listener") }
+        
+        
     }
-    
-    
     
     func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
         
