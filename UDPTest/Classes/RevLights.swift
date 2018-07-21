@@ -147,6 +147,7 @@ class RevLights: UIStackView {
         }
         
         leds.forEach{led in
+            
             self.addArrangedSubview(led)
             led.switchOnLED()
         }

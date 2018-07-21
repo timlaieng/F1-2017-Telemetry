@@ -203,6 +203,13 @@ class CarUDPData {
 };
 
 class UDPPacket {
+    
+    static let trackFileNames: [Float: String] = [0: "australia.png", 1: "malaysia.png", 2:"china.png", 3:"bahrain.png",
+                                                  4: "spain.png", 5:"monaco.png", 6:"canada.png", 7:"britain.png",
+                                                  8: "", 9: "hungary.png", 10:"belgium.png", 11:"italy.png", 12:"singapore.png",
+                                                  13:"japan.png", 14:"abu_dhabi.png", 15:"usa.png", 16:"brazil.png", 17:"austria.png",
+                                                  18:"russia.png", 19:"mexico.png", 20:"azerbaijan.png", 21:"bahrain.png", 22:"britain.png", 23:"usa.png", 24:"japan.png"]
+    
     var m_time:Float? = nil;
     var  m_lapTime:Float? = nil;
     var  m_lapDistance:Float? = nil;

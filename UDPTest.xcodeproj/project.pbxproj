@@ -36,6 +36,7 @@
 		226D87EE20D25CC100B6D6C6 /* canada.png in Resources */ = {isa = PBXBuildFile; fileRef = 226D87DA20D25CC100B6D6C6 /* canada.png */; };
 		226D87EF20D25CC100B6D6C6 /* abu_dhabi.png in Resources */ = {isa = PBXBuildFile; fileRef = 226D87DB20D25CC100B6D6C6 /* abu_dhabi.png */; };
 		226D87F220D2648600B6D6C6 /* DriverCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D87F120D2648600B6D6C6 /* DriverCircle.swift */; };
+		22CA86B02103917B00688D81 /* CircuitMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA86AF2103917B00688D81 /* CircuitMapViewController.swift */; };
 		22FE180020E5A191001798EA /* SectorTimesKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FE17FF20E5A191001798EA /* SectorTimesKeeper.swift */; };
 		30CCBD111F1189E100E75892 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CCBD101F1189E100E75892 /* AppDelegate.swift */; };
 		30CCBD131F1189E100E75892 /* CockpitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CCBD121F1189E100E75892 /* CockpitViewController.swift */; };
@@ -74,6 +75,7 @@
 		226D87DA20D25CC100B6D6C6 /* canada.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = canada.png; sourceTree = "<group>"; };
 		226D87DB20D25CC100B6D6C6 /* abu_dhabi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = abu_dhabi.png; sourceTree = "<group>"; };
 		226D87F120D2648600B6D6C6 /* DriverCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverCircle.swift; sourceTree = "<group>"; };
+		22CA86AF2103917B00688D81 /* CircuitMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitMapViewController.swift; sourceTree = "<group>"; };
 		22FE17FF20E5A191001798EA /* SectorTimesKeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorTimesKeeper.swift; sourceTree = "<group>"; };
 		30CCBD0D1F1189E100E75892 /* UDPTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UDPTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CCBD101F1189E100E75892 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				30CCBD121F1189E100E75892 /* CockpitViewController.swift */,
 				2261D78720D5E36800AD31DC /* TimingViewController.swift */,
+				22CA86AF2103917B00688D81 /* CircuitMapViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				2261D78820D5E36800AD31DC /* TimingViewController.swift in Sources */,
 				30CCBD131F1189E100E75892 /* CockpitViewController.swift in Sources */,
 				2261D78B20D5E52800AD31DC /* TimingTableCell.swift in Sources */,
+				22CA86B02103917B00688D81 /* CircuitMapViewController.swift in Sources */,
 				2261D78D20D5E63C00AD31DC /* TimingTableView.swift in Sources */,
 				30CCBD111F1189E100E75892 /* AppDelegate.swift in Sources */,
 				30CCBD241F1244DB00E75892 /* DataPacket.swift in Sources */,
