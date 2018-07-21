@@ -496,7 +496,7 @@ class UDPPacket {
                     car.m_currentLapInvalid = allBytes[index];index+=1; // current lap invalid - 0 = valid, 1 = invalid
                     car.m_penalties = allBytes[index];index+=1;
                 
-                car.getFastestSectorTimes()
+                //car.getFastestSectorTimes()
                 
                 self.m_car_data.append(car)
                 

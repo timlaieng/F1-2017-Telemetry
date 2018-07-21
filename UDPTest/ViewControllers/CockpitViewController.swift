@@ -92,15 +92,15 @@ class CockpitViewController: UIViewController, GCDAsyncUdpSocketDelegate, UDPMan
         
         
         
-        print(packet.m_car_data[0].driverFastestSectorOne?.description)
-        print(packet.m_car_data[0].driverFastestSectorTwo?.description)
-        if let fs1 = packet.m_car_data[0].driverFastestSectorOne {
+        
         
             
             self.testLabel.text = """
-        Car[0] Fastest S1: \(fs1.description)
-        """
-        }
+            WorldX: \(packet.m_x!.description)
+            WorldY: \(packet.m_y!.description)
+            WorldZ: \(packet.m_z!.description)
+            """
+        
         
         
         if var time = packet.m_last_lap_time, let position = packet.m_car_position {

@@ -285,7 +285,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Lap" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9p-NZ-Nsz">
-                                        <rect key="frame" x="95.333333333333371" y="0.0" width="29.333333333333329" height="20.333333333333332"/>
+                                        <rect key="frame" x="95.333333333333329" y="0.0" width="29.333333333333329" height="20.333333333333332"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="29" id="YUL-3D-I7r"/>
                                         </constraints>
@@ -303,7 +303,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="S2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46a-vy-Wka">
-                                        <rect key="frame" x="284.33333333333337" y="0.0" width="21" height="20.333333333333332"/>
+                                        <rect key="frame" x="284.33333333333331" y="0.0" width="21" height="20.333333333333332"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="21" id="kc6-uA-zer"/>
                                         </constraints>
@@ -350,7 +350,7 @@
             </objects>
             <point key="canvasLocation" x="876.61169415292363" y="389.60000000000002"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="op4-eJ-hkv">
             <objects>
                 <viewController id="llc-eu-fW6" customClass="CircuitMapViewController" customModule="UDPTest" customModuleProvider="target" sceneMemberID="viewController">
@@ -362,14 +362,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mnj-lL-i3h">
+                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="australia.png" translatesAutoresizingMaskIntoConstraints="NO" id="mnj-lL-i3h">
                                 <rect key="frame" x="0.0" y="0.0" width="736" height="365"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="ZJG-ea-2VW"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="ZJG-ea-2VW"/>
                     <connections>
                         <outlet property="trackMapImageView" destination="mnj-lL-i3h" id="fDu-Fc-EX4"/>
                     </connections>
@@ -400,4 +401,7 @@
             <point key="canvasLocation" x="115.59220389805098" y="124"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="australia.png" width="875" height="448"/>
+    </resources>
 </document>
