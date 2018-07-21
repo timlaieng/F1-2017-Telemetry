@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import simd
 
 class CircuitMapViewController: UIViewController, UDPManagerDelegate {
     
@@ -27,7 +28,14 @@ class CircuitMapViewController: UIViewController, UDPManagerDelegate {
                 displayedTrackNumber = receivedTrackNumber!}
             
         }
+        let rawPosition = simd_float2(x: packet.m_x!, y: packet.m_z!)
         
+        let startAxis = simd_float2(x:0.707, y:0.707)
+        let endAxis = simd_float2(x:0.707, y:-0.707)
+        let transformMatrix = simd_float2x2(startAxis, endAxis)
+        
+        let finalPosition = rawPosition * transformMatrix
+        print("x,z,\(finalPosition[0]),\(finalPosition[1])")
         
     }
     

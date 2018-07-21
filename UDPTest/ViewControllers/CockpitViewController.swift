@@ -100,7 +100,7 @@ class CockpitViewController: UIViewController, GCDAsyncUdpSocketDelegate, UDPMan
             WorldY: \(packet.m_y!.description)
             WorldZ: \(packet.m_z!.description)
             """
-        
+        print("x,z,\(packet.m_x!.description),\(packet.m_z!.description)")
         
         
         if var time = packet.m_last_lap_time, let position = packet.m_car_position {
